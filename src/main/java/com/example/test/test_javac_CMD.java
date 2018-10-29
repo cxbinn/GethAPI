@@ -36,7 +36,7 @@ public class test_javac_CMD {
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		StandardJavaFileManager fileManager = compiler.getStandardFileManager(null,null, null);
 		//读入源文件
-		Iterable fileObject = fileManager.getJavaFileObjects(classPath + "HelloWorld.java");
+		Iterable fileObject = fileManager.getJavaFileObjects(classPath + "Test1.java");
 		//编译
 		JavaCompiler.CompilationTask task = compiler.getTask(
 		                null, fileManager, null, null, null, fileObject);
@@ -47,21 +47,21 @@ public class test_javac_CMD {
 		URLClassLoader loader = new URLClassLoader(urls);
 		
 		
-		Class<?> cls=loader.loadClass("test.example.foxconn.HelloWorld");
-		
-		//URLClassLoader classLoader = new URLClassLoader(new URL[]{new URL("file:" + "HelloWorld.java")});
-		//Object o = classLoader.loadClass("HelloWorld").newInstance();
-		Object result = null;
-		try {
-			Method method = cls.getDeclaredMethod("Hello");
-			//result = method.invoke(cls);
-			Field f=cls.getDeclaredField("FUNC_HELLO");
-			System.out.println(String.valueOf(f.get(null)));
-			//System.out.println(result);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+//		Class<?> cls=loader.loadClass("test.example.foxconn.HelloWorld");
+//		
+//		//URLClassLoader classLoader = new URLClassLoader(new URL[]{new URL("file:" + "HelloWorld.java")});
+//		//Object o = classLoader.loadClass("HelloWorld").newInstance();
+//		Object result = null;
+//		try {
+//			Method method = cls.getDeclaredMethod("Hello");
+//			//result = method.invoke(cls);
+//			Field f=cls.getDeclaredField("FUNC_HELLO");
+//			System.out.println(String.valueOf(f.get(null)));
+//			//System.out.println(result);
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
 		
 	}

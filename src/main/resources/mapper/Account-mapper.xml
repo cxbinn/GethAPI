@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.service.AccountService">
+	<!-- 自定义返回结果集 -->
+	<resultMap id="accountMap" type="com.example.demo.entity.Account">
+		<result property="address" column="address" javaType="String"></result>
+		<result property="password" column="password" javaType="String"></result>
+		<result property="createdate" column="createdate" javaType="int"></result>
+		<result property="lasttime" column="lasttime" javaType="int"></result>
+	</resultMap>
+
+	<insert id="insertAccount">
+		insert into account (address,password,createdate,lasttime) values
+		(#{address},#{password},#{createdate},#{lasttime})
+	</insert>
+
+	<update id="updateAccount" parameterType="com.example.demo.entity.Account">
+		update account set
+		password=#{password} where
+		address=#{address}
+	</update>
+
+	<delete id="deleteAccount" parameterType="String">
+		delete from account where
+		address=#{address}
+	</delete>
+
+	<select id="getAccount" parameterType="String" resultType="com.example.demo.entity.Account">
+		select * from account where address=#{address}
+	</select>
+
+	<select id="getAllAccounts" resultMap="accountMap">
+		select * from account
+	</select>
+
+</mapper>

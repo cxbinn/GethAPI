@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<script src="http://10.134.184.155:8080/static/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+	function commit() {
+		var account = document.getElementsByClassName("account")[0].value;
+		var password = document.getElementsByClassName("password")[0].value;
+		var contractAddress = document.getElementsByClassName("contractAddress")[0].value;
+		var method = document.getElementsByClassName("method")[0].value;
+		var params = document.getElementsByClassName("params")[0].value;
+		var url = "http://10.134.184.155:8080/manager/callContract";
+	
+		
+		$.ajax({
+			type : "POST",
+			url : url,
+			async : true,
+			data : {
+				"account" : account,
+				"password":password,
+				"contractAddress":contractAddress,
+			}
+		}).success(function(data) {
+			alert(data);
+		});
+	}
+</script>
+<body>
+account:<input type="text" class="account"/><br />
+password:  <input type="text" class="password"/><br />
+contractAddress:<input type="text" class="contractAddress"/><br />
+method:<input type="text" class="method"/><br />
+param(s):<input type="text" class="params"/><br />
+<br />
+<input type="button" value="commit" onclick="commit()" />
+
+
+</body>
+</html>

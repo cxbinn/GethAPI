@@ -14,7 +14,7 @@ public class TestJsonRpc {
         Object[] params = new Object[]{"123456"};
         String methodName = "personal_newAccount";
         try {
-            JsonRpcHttpClient client = new JsonRpcHttpClient(new URL("http://10.134.159.154:3333"));
+            JsonRpcHttpClient client = new JsonRpcHttpClient(new URL("http://10.134.184.155:3333"));
             Object address = client.invoke(methodName, params, Object.class);
             System.out.println(address);
         } catch (Throwable throwable) {

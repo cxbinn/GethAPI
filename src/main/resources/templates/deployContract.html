@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<script src="http://10.134.184.155:8080/static/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+	function commit(){
+		var from = document.getElementsByClassName("from")[0].value;
+		var password = document.getElementsByClassName("password")[0].value;
+		var ID = document.getElementsByClassName("ID")[0].value;
+		var url = "http://10.134.184.155:8080/manager/deployContract"
+
+		$.ajax({
+			type : "POST",
+			url : url,
+			async : true,
+			data : {
+				"from" : from,
+				"password":password,
+				"ID":ID
+			},
+			success:function(data) {
+				alert(data);
+			},
+			error: function(){
+			    alert('failure');
+			  }
+		});
+		
+	}
+</script>
+<body>
+from:<input type="text" class="from"/><br />
+password:  <input type="text" class="password"/><br />
+ID:<input type="text" class="ID"/><br />
+
+<br />
+<input type="button" value="commit" onclick="commit()" />
+
+
+
+</body>
+</html>

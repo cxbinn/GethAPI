@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>tx</title>
+</head>
+<script src="http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/static/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+	function commit(){
+		var content = document.getElementsByClassName("code")[0].value;
+		var url = "http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/manager/solc"
+
+		$.ajax({
+			type : "POST",
+			url : url,
+			async : true,
+			data : {
+				"code" : content
+			},
+			success:function(data) {
+				alert(data);
+			},
+			error: function(){
+			    alert('failure');
+			  }
+		});
+		
+	}
+</script>
+<body>
+<textarea cols="60" rows="40" class="code">
+　輸入你想要寫的內容...
+</textarea>
+<br />
+<input type="button" value="commit" onclick="commit()" />
+
+
+</body>
+</html>

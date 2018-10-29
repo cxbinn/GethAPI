@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<script src="http://10.134.184.155:8080/static/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+function commit(){
+	var contractAddress = document.getElementsByClassName("contractAddress")[0].value;
+	var url = "http://10.134.184.155:8080/manager/AllMethod_Detail"
+
+	$.ajax({
+		type : "POST",
+		url : url,
+		async : true,
+		data : {
+			"contractAddress" : contractAddress
+		},
+		success:function(data) {
+			alert(data);
+		},
+		error: function(){
+		    alert('failure');
+		  }
+	});
+	
+}
+</script>
+<body>
+contractAddress:<input type="text" class="contractAddress"/><br />
+
+<br />
+<input type="button" value="commit" onclick="commit()" />
+
+
+</body>
+</html>

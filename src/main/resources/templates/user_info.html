@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>sample A</title>
+</head>
+
+<style type="text/css">
+#left{width:300px;float:left;border:1px solid #ccc;
+}
+#right{width:700px;height:700px;float:left;border:1px solid #ccc;
+}
+#getAccounts{width:300px;float:left;border:1px solid #ccc;}
+#getBalance{width:300px;float:left;border:1px solid #ccc;}
+#createAccount{width:300px;float:left;border:1px solid #ccc;}
+#tx{width:300px;float:left;border:1px solid #ccc;}
+#deployContract{width:300px;float:left;border:1px solid #ccc;}
+#callContract{width:300px;float:left;border:1px solid #ccc;}
+
+</style >
+
+<script src="http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/static/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	var url_getBalance="http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/manager/getBalance";
+	var url_createAccount="http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/manager/createAccount";
+	var url_getAccounts="http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/manager/getAccounts";
+	var url_tx="http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/manager/tx";
+	var url_deploy="http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/manager/deployContract"
+	var url_getMethods="http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/manager/AllMethod_Detail"
+	
+	function getBalance_commit(){
+		var account = document.getElementsByClassName("getBalance_address")[0].value;
+		var url = url_getBalance;
+
+		$.ajax({
+			type : "GET",
+			url : url,
+			async : true,
+			data : {
+				"account" : account
+			},
+			success:function(data) {
+				document.getElementById("content").innerHTML+=data+"<br />"+"<br />";
+				alert(data);
+			},
+			error: function(){
+			    alert('failure');
+			  }
+		});
+		
+	}
+	function createAccount_commit(){
+		var url = url_createAccount;
+		var createAccount_password = document.getElementsByClassName("createAccount_password")[0].value;
+		
+		$.ajax({
+			type : "GET",
+			url : url,
+			async : true,
+			data : {
+				password:createAccount_password
+			},
+			success:function(data) {
+				document.getElementById("content").innerHTML+=data+"<br />"+"<br />";
+				alert(data);
+				
+			},
+			error: function(){
+			    alert('failure');
+			  }
+		});
+		
+	}
+	function getAccounts_commit(){
+		var url = url_getAccounts;
+
+		$.ajax({
+			type : "GET",
+			url : url,
+			async : true,
+			data : {
+			},
+			success:function(data) {
+				document.getElementById("content").innerHTML+=data+"<br />"+"<br />";
+				alert(data);
+			},
+			error: function(){
+			    alert('failure');
+			  }
+		});
+		
+	}
+	
+	function tx_commit(){
+		var url = url_tx;
+		
+		var tx_from=document.getElementsByClassName("tx_from")[0].value;
+		var tx_to=document.getElementsByClassName("tx_to")[0].value;
+		var tx_coins=document.getElementsByClassName("tx_coins")[0].value;
+		var tx_password=document.getElementsByClassName("tx_password")[0].value;
+
+		$.ajax({
+			type : "GET",
+			url : url,
+			async : true,
+			data : {
+				"from" : tx_from,
+				"to" : tx_to,
+				"coins" : tx_coins,
+				"password" : tx_password
+			},
+			success:function(data) {
+				document.getElementById("content").innerHTML+=data+"<br />"+"<br />";
+				alert(data);
+			},
+			error: function(){
+			    alert('failure');
+			  }
+		});
+		
+	}
+	
+	function deploy_commit(){
+		var url = url_deploy;
+		
+		var deploy_user=document.getElementsByClassName("deploy_user")[0].value;
+		var deploy_password=document.getElementsByClassName("deploy_password")[0].value;
+		var deploy_id=document.getElementsByClassName("deploy_id")[0].value;
+
+		$.ajax({
+			type : "GET",
+			url : url,
+			async : true,
+			data : {
+				"from" : deploy_user,
+				"password" : deploy_password,
+				"ID" : deploy_id
+			},
+			success:function(data) {
+				document.getElementById("content").innerHTML+=data+"<br />"+"<br />";
+				alert(data);
+			},
+			error: function(){
+			    alert('failure');
+			  }
+		});
+		
+	}
+	
+	function getMethods_commit(){
+		var id = document.getElementsByClassName("getMethods_id")[0].value;
+		var url = url_getMethods;
+
+		$.ajax({
+			type : "GET",
+			url : url,
+			async : true,
+			data : {
+				"contract_ID" : id
+			},
+			success:function(data) {
+				document.getElementById("content").innerHTML+=data.replace(/,public/g,"<br />public")+"<br />"+"<br />";
+				alert(data);
+			},
+			error: function(){
+			    alert('failure');
+			  }
+		});
+		
+	}
+	
+</script>
+<body>
+<div id="left">
+<div id="getAccounts">
+getAccounts:<br />
+<input type="button" value="commit" onclick="getAccounts_commit()" />
+</div>
+<br />----------------------------
+
+<div id="getBalance">
+getBalance:<br />
+<input type="text" class="getBalance_address"/>
+<br />
+<input type="button" value="commit" onclick="getBalance_commit()" />
+</div>
+<br />----------------------------
+
+<div id="createAccount">
+createAccount:<br />
+<input type="text" class="createAccount_password"/>
+<input type="button" value="commit" onclick="createAccount_commit()" />
+</div>
+<br />----------------------------
+
+<div id="tx">
+from:<input type="text" class="tx_from"/><br />
+to:  <input type="text" class="tx_to"/><br />
+coin(s):<input type="text" class="tx_coins"/><br />
+password:<input type="text" class="tx_password"/><br />
+<input type="button" value="commit" onclick="tx_commit()" />
+</div>
+<br />----------------------------
+
+<div id="deployContract">
+deployContract:<br />
+<input type="text" class="deploy_user"/>
+<input type="text" class="deploy_password"/>
+<input type="text" class="deploy_id"/>
+<input type="button" value="commit" onclick="deploy_commit()" />
+</div>
+<br />----------------------------
+
+<div id="getMethods">
+getMethods_id:<br />
+<input type="text" class="getMethods_id"/>
+<br />
+<input type="button" value="commit" onclick="getMethods_commit()" />
+</div>
+<br />----------------------------
+
+
+
+</div>
+
+
+
+<div id="right">
+<div id="content">
+</div>
+</div>
+
+</body>
+</html>

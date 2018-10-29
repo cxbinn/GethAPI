@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.service.Transaction_javaclassService">
+	<!-- 自定义返回结果集 -->
+	<resultMap id="Transaction_javaclassMap" type="com.example.demo.entity.Transaction_javaclass">
+		<result property="contractAddress" column="contractaddress" javaType="String"></result>
+		<result property="className" column="classname" javaType="String"></result>
+		<result property="javaName" column="javaname" javaType="String"></result>
+		<result property="originalFile" column="originalfile" javaType="String"></result>
+		<result property="abi_name" column="abi_name" javaType="String"></result>
+		<result property="parent_of_date" column="parent_of_date" javaType="String"></result>
+	</resultMap>
+
+	<insert id="insertTransaction_javaclass">
+		insert into transaction_javaclass (contractAddress,classname,javaname,originalfile,abi_name,parent_of_date) values
+		(#{contractAddress},#{className},#{javaName},#{originalFile},#{abi_name},#{parent_of_date})
+	</insert>
+
+	<update id="updateTransaction_javaclass" parameterType="com.example.demo.entity.Transaction_javaclass">
+		update transaction_javaclass set
+		classname=#{className} where
+		contractAddress=#{contractAddress}
+	</update>
+	
+	<update id="updateContractAddress" parameterType="com.example.demo.entity.Transaction_javaclass">
+	update transaction_javaclass set contractaddress=#{contractAddress}
+	where originalFile = #{originalFile}
+	</update>
+
+	<delete id="deleteTransaction_javaclass" parameterType="String">
+		delete from transaction_javaclass where
+		contractAddress=#{contractAddress}
+	</delete>
+
+	<select id="getTransaction_javaclassByAddress" parameterType="String" resultType="com.example.demo.entity.Transaction_javaclass">
+		select contractAddress,classname,javaname,originalfile,abi_name,parent_of_date from transaction_javaclass where contractAddress=#{_parameter} limit(1)
+	</select>
+	
+	<select id="getTransaction_javaclassByID" parameterType="String" resultType="com.example.demo.entity.Transaction_javaclass">
+		select contractAddress,classname,javaname,originalfile,abi_name,parent_of_date from transaction_javaclass where originalfile=#{_parameter} limit(1)
+	</select>
+	<select id="getAllTransaction_javaclasses" resultMap="Transaction_javaclassMap">
+		select * from transaction_javaclass
+	</select>
+
+</mapper>

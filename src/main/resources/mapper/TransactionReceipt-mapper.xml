@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.service.TransactionReceiptService">
+	<!-- 自定义返回结果集 -->
+	<resultMap id="TransactionReceiptMap"
+		type="org.web3j.protocol.core.methods.response.TransactionReceipt">
+		<result property="blockHash" column="blockhash" javaType="String"></result>
+		<result property="blockNumber" column="blocknumber" javaType="String"></result>
+		<result property="contractAddress" column="contractaddress"
+			javaType="String"></result>
+		<result property="cumulativeGasUsed" column="cumulativegasused"
+			javaType="String"></result>
+		<result property="from" column="from_address" javaType="String"></result>
+		<result property="gasUsed" column="gasused" javaType="String"></result>
+		<!-- <result property="logs" column="logs" javaType="String"></result> -->
+		<result property="status" column="status" javaType="String"></result>
+		<result property="to" column="to_address" javaType="String"></result>
+		<result property="transactionHash" column="transactionhash"
+			javaType="String"></result>
+		<result property="transactionIndex" column="transactionindex"
+			javaType="String"></result>
+	</resultMap>
+
+	<insert id="insertTransactionReceipt" parameterType="org.web3j.protocol.core.methods.response.TransactionReceipt">
+		insert into transactionreceipt
+		(blockhash,blocknumber,contractaddress,cumulativegasused,from_address,
+		gasused,status,to_address,transactionhash,transactionindex)
+		values
+		(#{blockHash},#{blockNumber},#{contractAddress},#{cumulativeGasUsed},#{from},
+		#{gasUsed},#{status},#{to},#{transactionHash},#{transactionIndex})
+	</insert>
+
+	<update id="updateTransactionReceipt" parameterType="org.web3j.protocol.core.methods.response.TransactionReceipt">
+
+	</update>
+
+	<delete id="deleteTransactionReceipt" parameterType="String">
+	</delete>
+
+	<select id="getTransactionReceipt" parameterType="String" resultType="org.web3j.protocol.core.methods.response.TransactionReceipt">
+		select * from transactionreceipt where contractaddress=#{contractAddress}
+	</select>
+
+	<select id="getAllTransactionReceipts" resultMap="TransactionReceiptMap">
+		select * from
+		transactionreceipt
+	</select>
+
+</mapper>

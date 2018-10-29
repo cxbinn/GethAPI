@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.service.TransactionService">
+	<!-- 自定义返回结果集 -->
+	<resultMap id="TransactionMap"
+		type="org.web3j.protocol.core.methods.response.Transaction">
+		<result property="hash" column="hash" javaType="String"></result>
+		<result property="blockHash" column="blockHash" javaType="String"></result>
+		<result property="blockNumber" column="blockNumber" javaType="String"></result>
+		<result property="transactionIndex" column="transactionIndex" javaType="String"></result>
+		<result property="from" column="from_address" javaType="String"></result>
+		<result property="to" column="to_address" javaType="String"></result>
+		<result property="value" column="value" javaType="String"></result>
+		<result property="gasPrice" column="gasPrice" javaType="String"></result>
+		<result property="gas" column="gas" javaType="String"></result>
+		<result property="input" column="input" javaType="String"></result>
+		<result property="r" column="r" javaType="String"></result>
+		<result property="s" column="s" javaType="String"></result>
+		<result property="v" column="v" javaType="int"></result>
+	</resultMap>
+
+	<insert id="insertTransaction">
+		insert into transaction
+		(hash,blockHash,blockNumber,transactionIndex,from_address,
+		value,gasPrice,gas,to_address,input,r,s,v)
+		values
+		(#{hash},#{blockHash},#{blockNumber},#{transactionIndex},#{from},
+		#{value},#{gasPrice},#{gas},#{to},#{input},#{r},#{s},#{v})
+	</insert>
+
+	<update id="updateTransaction" parameterType="org.web3j.protocol.core.methods.response.Transaction">
+
+	</update>
+
+	<delete id="deleteTransaction" parameterType="String">
+	</delete>
+
+	<select id="getTransaction" parameterType="String" resultType="org.web3j.protocol.core.methods.response.Transaction">
+		select * from transaction where blockHash=#{blockHash}
+	</select>
+
+	<select id="getAllTransactions" resultMap="TransactionMap">
+		select hash,blockHash,blockNumber,transactionIndex,from_address,
+		value,gasPrice,gas,to_address,input,r,s,v from
+		transaction
+	</select>
+
+</mapper>

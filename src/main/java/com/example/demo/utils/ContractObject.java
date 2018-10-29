@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -6,12 +6,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import com.example.demo.configuration.GethProperties;
+
 public class ContractObject {
 	
 	private Class<?> cls=null;
 	private Object[] params=null;
 	private Object origin=null;
-	
+	private String resource=GethProperties.path.getJava();
+	private static URLClassLoader urlClassLoader = (URLClassLoader) Thread.currentThread().getContextClassLoader();
 	public ContractObject(){
 		
 	}
@@ -19,13 +22,27 @@ public class ContractObject {
 		this.origin=origin;
 	}
 	
-	public ContractObject(String url,String name) throws MalformedURLException{
-		URL[] urls = new URL[]{new URL("file:"+url)};
-		URLClassLoader loader = new URLClassLoader(urls);
+	public void forClass(String name) throws MalformedURLException{
 		
 		try {
-			cls=loader.loadClass(name);
-		} catch (Exception e) {
+			cls=Class.forName(name);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			forClass(resource,name);
+		}
+	}
+	
+	public void forClass(String url, String name) throws MalformedURLException {
+		System.out.println("now it's loading class from:" + url);
+		URL[] urls = new URL[] { new URL("file:" + url) };
+
+		URLClassLoader loader = new URLClassLoader(urls, urlClassLoader);
+
+		try {
+			cls = loader.loadClass(GethProperties.path.getSolc_package() + "."
+					+ name);
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

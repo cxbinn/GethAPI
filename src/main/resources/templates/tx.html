@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<script src="http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/static/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+	function commit() {
+		var from = document.getElementsByClassName("from")[0].value;
+		var to = document.getElementsByClassName("to")[0].value;
+		var coins = document.getElementsByClassName("coins")[0].value;
+		var password = document.getElementsByClassName("password")[0].value;
+		var url = "http://10.134.184.155:8080/demo-0.0.1-SNAPSHOT/manager/tx";
+	
+		alert(from+"<br />"+to+"<br />"+coins+"<br />"+url);
+		
+		$.ajax({
+			type : "POST",
+			dataType : "json",
+			url : url,
+			async : true,
+			data : {
+				"from" : from,
+				"to":to,
+				"coins":coins,
+				"password":password
+			}
+		}).success(function(data) {
+			alert(data);
+		});
+	}
+</script>
+<body>
+from:<input type="text" class="from"/><br />
+to:  <input type="text" class="to"/><br />
+coin(s):<input type="text" class="coins"/><br />
+password:<input type="text" class="password"/><br />
+
+<br />
+<input type="button" value="commit" onclick="commit()" />
+
+
+</body>
+</html>

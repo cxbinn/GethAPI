@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class test_psql_connection {
-	private static final String URL = "jdbc:postgresql://10.134.159.156:5432/flashcat"; //JDBC连接URL
+	//private static final String URL = "jdbc:postgresql://10.134.159.156:5432/flashcat"; //JDBC连接URL
+	private static final String URL = "jdbc:postgresql://10.134.184.155:5432/geth"; //JDBC连接URL
 	private static final String USR = "postgres"; //用户名
 	private static final String PWD = "postgres"; //密码
 	
@@ -38,7 +39,7 @@ public class test_psql_connection {
 		try {
 			con = getConnection();
 			
-			PreparedStatement pstmt = con.prepareStatement("select * from u_user");
+			PreparedStatement pstmt = con.prepareStatement("select * from account");
 			//PreparedStatement pstmt = con.prepareStatement("insert into u_user(serial,name,password,email,tel,code) values('aa','myname','pw','e@email.com','123453156315','F3262695')");
 			ResultSet rs = pstmt.executeQuery();
 			//pstmt.execute();

@@ -52,18 +52,17 @@ public class ContractTest {
 			
 		}
 		Credentials credentials = WalletUtils.loadCredentials(password, walletfile);
-		/*
-		URL[] urls = new URL[]{new URL("file:"+"/data/geth/tmp_java/")};
-		URLClassLoader loader = new URLClassLoader(urls);
-		Class<?> cls=loader.loadClass("test.example.foxconn.HelloWorld");
-		*/
-		
-		URLClassLoader classLoader = new URLClassLoader(new URL[]{new URL("file:" + "HelloWorld.java")});
-		//Object o = classLoader.loadClass("HelloWorld").newInstance();
+//		
+//		URL[] urls = new URL[]{new URL("file:"+"/data/geth/tmp_java/")};
+//		URLClassLoader loader = new URLClassLoader(urls);
+//		Class<?> cls=loader.loadClass("test.example.foxconn.Testweb");
 		
 		
-		ContractObject contract=new ContractObject("/data/geth/tmp_java/","test.example.foxconn.HelloWorld");
+//		URLClassLoader classLoader = new URLClassLoader(new URL[]{new URL("file:" + "Testweb.java")});
+//		Object a = classLoader.loadClass("Testweb").newInstance();
 		
+		
+		ContractObject contract=new ContractObject("/data/geth/tmp_java/","test.example.foxconn.Testweb");
 		contract.paramsReady(web3j, credentials, ManagedTransaction.GAS_PRICE, Contract.GAS_LIMIT);
 		RemoteCall<?> result=(RemoteCall<?>)contract.invoke("deploy", Web3j.class,Credentials.class,BigInteger.class,BigInteger.class);
 		Object o=result.send();
@@ -71,37 +70,36 @@ public class ContractTest {
 		
 		//HelloWorld contract = HelloWorld.deploy(web3j, credentials, ManagedTransaction.GAS_PRICE, Contract.GAS_LIMIT).send();
 		
-		contract.init(o);
-		
-
-//		System.out.println(contract.isValid());
-		contract.paramsReady(null);
-		boolean isValid=(boolean)contract.invoke("isValid");
-		System.out.println(isValid);
-		if (isValid) {
-			System.out.println("---");
-			
-			contract.paramsReady(null);
-			String contractAddress = (String) contract.invoke("getContractAddress");
-			System.out.println(contractAddress);
-			System.out.println("---");
-			
-			String getName = (String) ((RemoteCall<?>)contract.invoke("getName")).send();
-			System.out.println(getName);
-			
-			
-			System.out.println("---");
-			contract.paramsReady(BigInteger.valueOf(8));
-			((RemoteCall<?>)contract.invoke("setNum",BigInteger.class)).send();
-			
-			contract.paramsReady(BigInteger.valueOf(3));
-			BigInteger addNum=(BigInteger)((RemoteCall<?>)contract.invoke("addNum",BigInteger.class)).send();
-			System.out.println("contract.invoke(\"addNum\",BigInteger.class)).send()::"+addNum);
-			System.out.println("---");
-
-		} else {
-			System.out.println("Deploy ERROR !!!");
-		}
+//		contract.init(o);
+//		
+//
+//		contract.paramsReady(null);
+//		boolean isValid=(boolean)contract.invoke("isValid");
+//		System.out.println(isValid);
+//		if (isValid) {
+//			System.out.println("---");
+//			
+//			contract.paramsReady(null);
+//			String contractAddress = (String) contract.invoke("getContractAddress");
+//			System.out.println(contractAddress);
+//			System.out.println("---");
+//			
+//			String getName = (String) ((RemoteCall<?>)contract.invoke("getName")).send();
+//			System.out.println(getName);
+//			
+//			
+//			System.out.println("---");
+//			contract.paramsReady(BigInteger.valueOf(8));
+//			((RemoteCall<?>)contract.invoke("setNum",BigInteger.class)).send();
+//			
+//			contract.paramsReady(BigInteger.valueOf(3));
+//			BigInteger addNum=(BigInteger)((RemoteCall<?>)contract.invoke("addNum",BigInteger.class)).send();
+//			System.out.println("contract.invoke(\"addNum\",BigInteger.class)).send()::"+addNum);
+//			System.out.println("---");
+//
+//		} else {
+//			System.out.println("Deploy ERROR !!!");
+//		}
 	}
 	
 	public static BigInteger getBalance(String account) throws IOException {

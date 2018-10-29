@@ -1,4 +1,4 @@
-package com.example.demo.GethUtils;
+package com.example.demo.utils;
 
 public class PersonalWalletUtils {
 

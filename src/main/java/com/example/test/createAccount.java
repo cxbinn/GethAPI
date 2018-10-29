@@ -16,7 +16,7 @@ public class createAccount {
 	 * 0x4f2055268db028c1345c85247c988214b9524a98
 	 */
 	public static void main(String[] args) throws IOException{
-		String url = "http://10.134.159.154:3333/";
+		String url = "http://10.134.184.155:3333/";
 		Web3j web3j = Web3j.build(new HttpService(url)); // defaults to http://localhost:8545/
 		
 		/*
@@ -24,18 +24,18 @@ public class createAccount {
 		 * System.out.println(admin.personalNewAccount("foxconn.88").send().getAccountId());
 		 */
 		
-		BigInteger balance=web3j.ethGetBalance("0xe921f1dafefc7901516c718a2f2fe7c6d6aeb5ec",DefaultBlockParameterName.LATEST).send().getBalance();
+		BigInteger balance=web3j.ethGetBalance("0xdd65547b956e5e1a63ab21d171df2f58959d13cf",DefaultBlockParameterName.LATEST).send().getBalance();
 		//
 		System.out.println("balance:"+balance);
 		System.out.println("aaaaaaaaaaaa:"+web3j.ethAccounts().send().getResult().get(0));
-		try {
-			Web3ClientVersion web3ClientVersion = web3j.web3ClientVersion().send();
-			String clientVersion = web3ClientVersion.getWeb3ClientVersion();
-			System.out.println(clientVersion);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			Web3ClientVersion web3ClientVersion = web3j.web3ClientVersion().send();
+//			String clientVersion = web3ClientVersion.getWeb3ClientVersion();
+//			System.out.println(clientVersion);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 }
